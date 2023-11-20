@@ -47,7 +47,11 @@ if (isset($_POST['form1'])) {
         $error_message .= LANG_VALUE_125."<br>";
     }
 
-   
+    if(empty($_POST['cust_country'])) {
+        $valid = 0;
+        $error_message .= LANG_VALUE_126."<br>";
+    }
+
     if(empty($_POST['cust_city'])) {
         $valid = 0;
         $error_message .= LANG_VALUE_127."<br>";
@@ -87,6 +91,7 @@ if (isset($_POST['form1'])) {
                                         cust_cname,
                                         cust_email,
                                         cust_phone,
+                                        cust_country,
                                         cust_address,
                                         cust_city,
                                         cust_state,
@@ -94,6 +99,7 @@ if (isset($_POST['form1'])) {
                                         cust_b_name,
                                         cust_b_cname,
                                         cust_b_phone,
+                                        cust_b_country,
                                         cust_b_address,
                                         cust_b_city,
                                         cust_b_state,
@@ -101,6 +107,7 @@ if (isset($_POST['form1'])) {
                                         cust_s_name,
                                         cust_s_cname,
                                         cust_s_phone,
+                                        cust_s_country,
                                         cust_s_address,
                                         cust_s_city,
                                         cust_s_state,
@@ -116,6 +123,7 @@ if (isset($_POST['form1'])) {
                                         strip_tags($_POST['cust_cname']),
                                         strip_tags($_POST['cust_email']),
                                         strip_tags($_POST['cust_phone']),
+                                        strip_tags($_POST['cust_country']),
                                         strip_tags($_POST['cust_address']),
                                         strip_tags($_POST['cust_city']),
                                         strip_tags($_POST['cust_state']),
@@ -231,7 +239,23 @@ if (isset($_POST['form1'])) {
                                     <textarea name="cust_address" class="form-control" cols="30" rows="10"
                                         style="height:70px;"><?php if(isset($_POST['cust_address'])){echo $_POST['cust_address'];} ?></textarea>
                                 </div>
-
+                                <div class="col-md-6 form-group">
+                                    <label for=""><?php echo LANG_VALUE_106; ?> *</label>
+                                    <select name="cust_country" class="form-control select2">
+                                        <option value="">Select country</option>
+                                        <?php
+                                    $statement = $pdo->prepare("SELECT * FROM tbl_country ORDER BY country_name ASC");
+                                    $statement->execute();
+                                    $result = $statement->fetchAll(PDO::FETCH_ASSOC);                            
+                                    foreach ($result as $row) {
+                                        ?>
+                                        <option value="<?php echo $row['country_id']; ?>">
+                                            <?php echo $row['country_name']; ?></option>
+                                        <?php
+                                    }
+                                    ?>
+                                    </select>
+                                </div>
 
                                 <div class="col-md-6 form-group">
                                     <label for=""><?php echo LANG_VALUE_107; ?> *</label>
