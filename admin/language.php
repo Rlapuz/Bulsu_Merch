@@ -66,7 +66,7 @@ foreach ($result as $row) {
                 <div class="box box-info">
                     <div class="box-body">
                         <div class="form-group">
-                            <label for="" class="col-sm-4 control-label">Currency <span>*</span></label>
+                            <label for="" class="col-sm-4 control-label">Currency <span>₱</span></label>
                             <div class="col-sm-6">
                                 <input type="text" class="form-control" name="lang_value[1]"
                                     value="<?php echo $lang_ids[1]; ?>">
