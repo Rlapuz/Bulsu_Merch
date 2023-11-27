@@ -240,12 +240,12 @@ if ($success_message != '') {
                                     <b>Card CVV:</b> <?php echo $row['card_cvv']; ?><br>
                                     <b>Expire Month:</b> <?php echo $row['card_month']; ?><br>
                                     <b>Expire Year:</b> <?php echo $row['card_year']; ?><br>
-                                    <?php elseif($row['payment_method'] == 'Bank Deposit'): ?>
+                                    <?php elseif($row['payment_method'] == 'Cash'): ?>
                                     <b>Payment Method:</b>
                                     <?php echo '<span style="color:red;"><b>'.$row['payment_method'].'</b></span>'; ?><br>
                                     <b>Payment Id:</b> <?php echo $row['payment_id']; ?><br>
                                     <b>Date:</b> <?php echo $row['payment_date']; ?><br>
-                                    <b>Transaction Information:</b> <br><?php echo $row['bank_transaction_info']; ?><br>
+                                    <b>Message</b> <br><?php echo $row['bank_transaction_info']; ?><br>
                                     <?php endif; ?>
                                 </td>
                                 <td>$<?php echo $row['paid_amount']; ?></td>

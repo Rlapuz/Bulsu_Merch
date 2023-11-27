@@ -1087,7 +1087,7 @@ foreach ($result as $row) {
                 <div class="box box-info">
                     <div class="box-body">
                         <div class="form-group">
-                            <label for="" class="col-sm-4 control-label">Congratulation! Payment is successful.
+                            <label for="" class="col-sm-4 control-label">Congratulation! your Order is succesful.
                                 <span>*</span></label>
                             <div class="col-sm-6">
                                 <textarea name="lang_value[121]" class="form-control" cols="30" rows="10"

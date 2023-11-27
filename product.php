@@ -518,8 +518,8 @@ if($success_message1 != '') {
                                         data-toggle="tab"><?php echo LANG_VALUE_61; ?></a></li>
                                 <li role="presentation"><a href="#return_policy" aria-controls="return_policy"
                                         role="tab" data-toggle="tab"><?php echo LANG_VALUE_62; ?></a></li>
-                                <li role="presentation"><a href="#review" aria-controls="review" role="tab"
-                                        data-toggle="tab"><?php echo LANG_VALUE_63; ?></a></li>
+                                <!-- <li role="presentation"><a href="#review" aria-controls="review" role="tab"
+                                        data-toggle="tab"><?php echo LANG_VALUE_63; ?></a></li> -->
                             </ul>
 
                             <!-- Tab panes -->

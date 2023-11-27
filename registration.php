@@ -11,28 +11,35 @@ foreach ($result as $row) {
 
 <?php
 if (isset($_POST['form1'])) {
-
     $valid = 1;
 
     if(empty($_POST['cust_name'])) {
         $valid = 0;
-        $error_message .= LANG_VALUE_123."<br>";
+        $error_message .= LANG_VALUE_123 . "<br>";
     }
 
-    if(empty($_POST['cust_email'])) {
+    if (empty($_POST['cust_email'])) {
         $valid = 0;
-        $error_message .= LANG_VALUE_131."<br>";
+        $error_message .= LANG_VALUE_131 . "<br>";
     } else {
         if (filter_var($_POST['cust_email'], FILTER_VALIDATE_EMAIL) === false) {
             $valid = 0;
-            $error_message .= LANG_VALUE_134."<br>";
+            $error_message .= LANG_VALUE_134 . "<br>";
         } else {
-            $statement = $pdo->prepare("SELECT * FROM tbl_customer WHERE cust_email=?");
-            $statement->execute(array($_POST['cust_email']));
-            $total = $statement->rowCount();                            
-            if($total) {
+            $emailParts = explode('@', $_POST['cust_email']);
+            $domain = end($emailParts);
+
+            if ($domain !== 'bulsu.edu.ph') {
                 $valid = 0;
-                $error_message .= LANG_VALUE_147."<br>";
+                $error_message .= "Please use a valid '@bulsu.edu.ph' email address.<br>";
+            } else {
+                $statement = $pdo->prepare("SELECT * FROM tbl_customer WHERE cust_email=?");
+                $statement->execute(array($_POST['cust_email']));
+                $total = $statement->rowCount();                            
+                if($total) {
+                    $valid = 0;
+                    $error_message .= LANG_VALUE_147 . "<br>";
+                }
             }
         }
     }
@@ -88,7 +95,7 @@ if (isset($_POST['form1'])) {
         // saving into the database
         $statement = $pdo->prepare("INSERT INTO tbl_customer (
                                         cust_name,
-                                        cust_cname,
+                                        -- cust_cname,
                                         cust_email,
                                         cust_phone,
                                         cust_country,
@@ -117,10 +124,10 @@ if (isset($_POST['form1'])) {
                                         cust_datetime,
                                         cust_timestamp,
                                         cust_status
-                                    ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                                    ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         $statement->execute(array(
                                         strip_tags($_POST['cust_name']),
-                                        strip_tags($_POST['cust_cname']),
+                                        // strip_tags($_POST['cust_cname']),
                                         strip_tags($_POST['cust_email']),
                                         strip_tags($_POST['cust_phone']),
                                         strip_tags($_POST['cust_country']),
@@ -171,7 +178,7 @@ if (isset($_POST['form1'])) {
         mail($to, $subject, $message, $headers);
 
         unset($_POST['cust_name']);
-        unset($_POST['cust_cname']);
+        // unset($_POST['cust_cname']);
         unset($_POST['cust_email']);
         unset($_POST['cust_phone']);
         unset($_POST['cust_address']);
@@ -180,7 +187,7 @@ if (isset($_POST['form1'])) {
         unset($_POST['cust_zip']);
 
         $success_message = LANG_VALUE_152;
-    }
+    }   
 }
 ?>
 
@@ -219,11 +226,11 @@ if (isset($_POST['form1'])) {
                                     <input type="text" class="form-control" name="cust_name"
                                         value="<?php if(isset($_POST['cust_name'])){echo $_POST['cust_name'];} ?>">
                                 </div>
-                                <div class="col-md-6 form-group">
+                                <!-- <div class="col-md-6 form-group">
                                     <label for=""><?php echo LANG_VALUE_103; ?></label>
                                     <input type="text" class="form-control" name="cust_cname"
                                         value="<?php if(isset($_POST['cust_cname'])){echo $_POST['cust_cname'];} ?>">
-                                </div>
+                                </div> -->
                                 <div class="col-md-6 form-group">
                                     <label for=""><?php echo LANG_VALUE_94; ?> *</label>
                                     <input type="email" class="form-control" name="cust_email"

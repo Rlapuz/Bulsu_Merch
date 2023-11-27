@@ -326,12 +326,12 @@ if(!isset($_SESSION['cart_p_id'])) {
                         <div class="row">
 
                             <div class="col-md-12 form-group">
-                                <label for=""><?php echo LANG_VALUE_34; ?> *</label>
-                                <select name="payment_method" class="form-control select2" id="advFieldsStatus">
-                                    <option value=""><?php echo LANG_VALUE_35; ?></option>
-                                    <option value="PayPal"><?php echo LANG_VALUE_36; ?></option>
-                                    <option value="Bank Deposit"><?php echo LANG_VALUE_38; ?></option>
-                                </select>
+                                <label for="">As of now we only accept cash.</label>
+                                <!-- <select name="payment_method" class="form-control select2" id="advFieldsStatus"> -->
+                                <!-- <option value=""><?php echo LANG_VALUE_35; ?></option> -->
+                                <!-- <option value="PayPal"><?php echo LANG_VALUE_36; ?></option> -->
+                                <h1 value="Cash">Pay on Campus</h1>
+                                <!-- </select> -->
                             </div>
 
                             <form class="paypal" action="<?php echo BASE_URL; ?>payment/paypal/payment_process.php"
@@ -343,10 +343,10 @@ if(!isset($_SESSION['cart_p_id'])) {
                                 <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynow_LG.gif:NonHostedGuest" />
 
                                 <input type="hidden" name="final_total" value="<?php echo $final_total; ?>">
-                                <div class="col-md-12 form-group">
+                                <!-- <div class="col-md-12 form-group">
                                     <input type="submit" class="btn btn-primary" value="<?php echo LANG_VALUE_46; ?>"
                                         name="form1">
-                                </div>
+                                </div> -->
                             </form>
 
 
@@ -354,7 +354,7 @@ if(!isset($_SESSION['cart_p_id'])) {
                             <form action="payment/bank/init.php" method="post" id="bank_form">
                                 <input type="hidden" name="amount" value="<?php echo $final_total; ?>">
                                 <div class="col-md-12 form-group">
-                                    <label for=""><?php echo LANG_VALUE_43; ?></span></label><br>
+                                    <label for="">Meneses Campus</span></label><br>
                                     <?php
                                             $statement = $pdo->prepare("SELECT * FROM tbl_settings WHERE id=1");
                                             $statement->execute();
@@ -365,14 +365,13 @@ if(!isset($_SESSION['cart_p_id'])) {
                                             ?>
                                 </div>
                                 <div class="col-md-12 form-group">
-                                    <label for=""><?php echo LANG_VALUE_44; ?> <br><span
-                                            style="font-size:12px;font-weight:normal;">(<?php echo LANG_VALUE_45; ?>)</span></label>
+                                    <label for="">Message <br><span style="font-size:12px;font-weight:normal;">(add
+                                            message)</span></label>
                                     <textarea name="transaction_info" class="form-control" cols="30"
                                         rows="10"></textarea>
                                 </div>
                                 <div class="col-md-12 form-group">
-                                    <input type="submit" class="btn btn-primary" value="<?php echo LANG_VALUE_46; ?>"
-                                        name="form3">
+                                    <input type="submit" class="btn btn-primary" value="Place Order" name="form3">
                                 </div>
                             </form>
 
